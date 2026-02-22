@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: lseg_postgres
+    environment:
+      POSTGRES_USER: lseg_user
+      POSTGRES_PASSWORD: lseg_pass
+      POSTGRES_DB: lseg_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  airflow:
+    image: apache/airflow:2.8.1
+    container_name: lseg_airflow
+    environment:
+      AIRFLOW__CORE__EXECUTOR: LocalExecutor
+      AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://lseg_user:lseg_pass@postgres:5432/lseg_db
+      AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./module1_entity_pipeline/dags:/opt/airflow/dags
+    depends_on:
+      - postgres
+    command: standalone
+
+volumes:
+  postgres_data:

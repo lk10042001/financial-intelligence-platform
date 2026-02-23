@@ -1,6 +1,41 @@
+# environment and secrets
 .env
+*.txt
+
+# data files
 *.csv
 *.xlsx
+*.json
+
+# python
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+
+# jupyter
 .ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# old and practice files
+*_old.ipynb
+*_Practice*.ipynb
+Untitled*.ipynb
+P4_*.ipynb
+
+# power bi
+*.pbix
+
+# os
+.DS_Store
+Thumbs.db
+
+# mlflow
+mlruns/
+mlflow.db
+
+# misc
+*.log
